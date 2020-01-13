@@ -93,16 +93,16 @@ export default {
                 this.dialogFormVisible = true;
             }
         },
-        // 测试接口
+        // 修改密码
         submit() {
-            // 修改密码(put)
             let params = {
-                userId: '14d20908-32b2-11ea-9f27-888888888788',
+                userId: localStorage.getItem('userId'),
                 newpwd: this.form.newpwd
             };
             http.fetchPut('/login', params)
                 .then(res => {
                     console.log(res);
+                    alert('密码修改成功');
                 })
                 .catch(err => {
                     console.log('请求出错', err);
@@ -118,7 +118,6 @@ export default {
             //     .catch(err => {
             //         console.log('请求出错', err);
             //     });
-
             this.dialogFormVisible = false;
         },
         // 侧边栏折叠

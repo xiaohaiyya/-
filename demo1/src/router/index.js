@@ -131,6 +131,16 @@ export default new Router({
             meta: { title: '登录' }
         },
         {
+            path: '/register',
+            component: () => import(/* webpackChunkName: "register" */ '../components/page/register.vue'),
+            meta: { title: '注册' },
+        },
+        {
+            path: '/success',
+            component: () => import(/* webpackChunkName: "register" */ '../components/page/success.vue'),
+            meta: { title: '注册成功' }
+        },
+        {
             path: '*',
             redirect: '/404'
         }
