@@ -7,6 +7,14 @@
 
 <script>
 export default {
+    data() {
+        return {
+
+        }
+    },
+    mounted() {
+
+    },
     methods: {
         gotoLogin() {
             this.$router.push('/login');

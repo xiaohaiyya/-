@@ -16,6 +16,11 @@ Vue.prototype.$axios = axios;
 import QS from 'qs'
 Vue.prototype.qs = QS;
 
+// 引入echarts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
+
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
