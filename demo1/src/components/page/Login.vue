@@ -90,7 +90,7 @@ export default {
                         password: this.param.password
                     };
                     console.log(params);
-                    // 测试登录（post）
+                    // 登录
                     http.fetchPost('/login', params)
                         .then(res => {
                             if (res.data.data == '登录成功') {

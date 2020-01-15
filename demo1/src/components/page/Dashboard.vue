@@ -476,9 +476,9 @@ export default {
 
 <style scoped>
 @import url('../../assets/css/reset.css');
-.area2, .area1_top, .area1_bottom{
+/* .area2, .area1_top, .area1_bottom{
     border-bottom: 1px dashed black !important;
-}
+} */
 .area1,
 .area2,
 .area3 {

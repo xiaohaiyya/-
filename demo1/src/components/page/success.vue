@@ -1,7 +1,12 @@
 <template>
-    <div>
-        注册成功页面
-        <el-button @click="gotoLogin">返回首页</el-button>
+    <div class="container">
+        <div class="box">
+            <div class="box_child">
+                <div>你的账号: 注册成功</div>
+                <el-button @click="gotoLogin" type="primary">返回首页</el-button>
+            </div>    
+        </div>
+        
     </div>
 </template>
 
@@ -25,4 +30,14 @@ export default {
 
 
 <style scoped>
+.box {
+    width: 100%;
+    height: 1000px;
+}
+.box_child {
+    width: 300px;
+    height: 300px;
+    margin: 400px auto;
+    text-align: center;
+}
 </style>

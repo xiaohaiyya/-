@@ -74,13 +74,19 @@ img {
 }
 
 /* 横排自适应排列 */
-.rowcenter{
+.rowcenter {
     display: flex;
     justify-content: space-between;
 }
+
 /* 水平垂直居中 */
-.row-col-center{
+.row-col-center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* 样式调整,透明度为0 */
+.adjust {
+    opacity: 0;
 }

@@ -54,7 +54,16 @@ export default {
             window.setTimeout(function() {
                 map.panTo(new BMap.Point(116.409, 39.918));
             }, 2000);
+        },
+        // 搜索按钮
+        search() {
+            console.log('搜索按钮');
+        },
+        // 重置按钮
+        reset() {
+            console.log('重置按钮');
         }
+        
     }
 };
 </script>
