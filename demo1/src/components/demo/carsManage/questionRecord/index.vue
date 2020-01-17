@@ -64,8 +64,10 @@
                 <el-table-column prop="date" label="创建日期" align="center"></el-table-column>
                 <el-table-column prop="name" label="处理时间" align="center"></el-table-column>
                 <el-table-column label="操作" align="center" class="change">
-                  <span class="c_button" @click="lookProof">查看凭证</span>
-                  <span class="c_button" @click="details">详情</span>
+                    <template scope="scope">
+                        <span class="c_button" @click="lookProof(scope.$index, scope.row)">查看凭证</span>
+                        <span class="c_button" @click="details(scope.$index, scope.row)">详情</span>
+                    </template>
                 </el-table-column>
             </el-table>
         </div>
@@ -171,12 +173,16 @@ export default {
             console.log(`当前页: ${val}`);
         },
         // 查看位置按钮
-        lookProof() {
-          console.log('查看凭证按钮');
+        lookProof(index, data) {
+            console.log(index);
+            console.log(data);
+            console.log('查看凭证按钮');
         },
         // 详情按钮
-        details() {
-          console.log('详情按钮');
+        details(index, data) {
+            console.log(index);
+            console.log(data);
+            console.log('详情按钮');
         }
     }
 };
@@ -203,11 +209,11 @@ export default {
     margin-top: 20px;
     text-align: center;
 }
-.c_button{
-  border: none;
-  background: transparent;
-  margin: 8px;
-  outline: none;
-  cursor: pointer;
+.c_button {
+    border: none;
+    background: transparent;
+    margin: 8px;
+    outline: none;
+    cursor: pointer;
 }
 </style>

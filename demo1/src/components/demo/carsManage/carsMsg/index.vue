@@ -58,9 +58,11 @@
                 <el-table-column prop="address" label="投入时间" align="center"></el-table-column>
                 <el-table-column prop="address" label="最后在线时间" align="center"></el-table-column>
                 <el-table-column label="操作" align="center" class="change">
-                  <span class="c_button" @click="lookLocal">位置</span>
-                  <span class="c_button" @click="edit">编辑</span>
-                  <span class="c_button" @click="del">删除</span>
+                    <template scope="scope">
+                        <span class="c_button" @click="lookLocal(scope.$index, scope.row)">位置</span>
+                        <span class="c_button" @click="edit(scope.$index, scope.row)">编辑</span>
+                        <span class="c_button" @click="del(scope.$index)">删除</span>
+                    </template>
                 </el-table-column>
             </el-table>
         </div>
@@ -166,16 +168,21 @@ export default {
             console.log(`当前页: ${val}`);
         },
         // 查看位置按钮
-        lookLocal() {
-          console.log('查看位置按钮');
+        lookLocal(index, data) {
+            console.log(index);
+            console.log(data);
+            console.log('查看位置按钮');
         },
         // 编辑按钮
-        edit() {
-          console.log('编辑按钮');
+        edit(index, data) {
+            console.log(index);
+            console.log(data);
+            console.log('编辑按钮');
         },
         // 删除按钮
-        del() {
-          console.log('删除按钮');
+        del(index) {
+            console.log(index);
+            console.log('删除按钮');
         }
     }
 };
@@ -202,11 +209,11 @@ export default {
     margin-top: 20px;
     text-align: center;
 }
-.c_button{
-  border: none;
-  background: transparent;
-  margin: 8px;
-  outline: none;
-  cursor: pointer;
+.c_button {
+    border: none;
+    background: transparent;
+    margin: 8px;
+    outline: none;
+    cursor: pointer;
 }
 </style>

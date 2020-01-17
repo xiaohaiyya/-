@@ -72,7 +72,7 @@ export default {
                 username: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
                 password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
                 phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],
-                authcode: [{ required: true, message: '验证码不能为空', trigger: 'blur' }],
+                authcode: [{ required: true, message: '验证码不能为空', trigger: 'blur' }]
             },
             // 登录方法判断
             c_flag: true,
@@ -86,23 +86,22 @@ export default {
             this.$refs.login.validate(valid => {
                 if (valid) {
                     let params = {
-                        username: this.param.username,
-                        password: this.param.password
+                        adminName: this.param.username,
+                        adminPassword: this.param.password
                     };
-                    console.log(params);
                     // 登录
                     http.fetchPost('/login', params)
                         .then(res => {
-                            if (res.data.data == '登录成功') {
+                            if (res.data.status == 10000) {
                                 this.$message.success('登录成功');
+                                // 存储用户名
                                 localStorage.setItem('ms_username', this.param.username);
-                                // localStorage存储userId,方便后续操作
-                                let userId = res.data.userId;
-                                localStorage.setItem('userId', userId);
+                                // 存储用户token
+                                localStorage.setItem('adminToken', res.data.data.adminToken);
                                 this.$router.push('/');
                             } else {
-                                this.$message.error('账号或密码错误,请重新输入');
-                                console.log('error submit!!');
+                                this.$message.error('账号或密码输入错误');
+                                // console.log('error submit!!');
                                 return false;
                             }
                         })
@@ -111,7 +110,7 @@ export default {
                         });
                 } else {
                     this.$message.error('请输入账号和密码');
-                    console.log('error submit!!');
+                    // console.log('error submit!!');
                     return false;
                 }
             });
@@ -124,15 +123,15 @@ export default {
             this.c_flag = false;
         },
         getCode() {
-            console.log('发送登录验证码')
+            console.log('发送登录验证码');
         },
         // 注册账户
         register() {
             console.log('注册账户');
-            this.$router.push('/register')
+            this.$router.push('/register');
         },
         forget() {
-            console.log('忘记密码')
+            console.log('忘记密码');
         }
     }
 };
@@ -171,7 +170,7 @@ export default {
     color: rgb(64, 158, 255);
     border-bottom: 2px solid rgb(64, 158, 255);
 }
-.remember{
+.remember {
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;

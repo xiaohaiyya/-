@@ -73,7 +73,7 @@ export default new Router({
                 {
                     path: '/fenceList',
                     component: () => import(/* webpackChunkName: "donate" */ '../components/demo/electronicFence/fenceList'),
-                    meta: { title: '围栏列表' }
+                    meta: { title: '围栏列表' },
                 },
                 {
                     path: '/fenceMap',

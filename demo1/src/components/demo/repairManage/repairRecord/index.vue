@@ -34,7 +34,7 @@
                         <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"></el-date-picker>
                     </div>
                 </el-form-item>
-                <el-form-item >
+                <el-form-item>
                     <el-button type="primary" @click="search" style="width: 120px;">搜索</el-button>
                 </el-form-item>
                 <el-form-item>
@@ -58,7 +58,9 @@
                 <el-table-column prop="date" label="维修人" align="center"></el-table-column>
                 <el-table-column prop="date" label="维修时间" align="center"></el-table-column>
                 <el-table-column label="操作" align="center" class="change">
-                  <span class="c_button" @click="lookProof">查看凭证</span>
+                    <template scope="scope">
+                        <span class="c_button" @click="lookProof(scope.$index, scope.row)">查看凭证</span>
+                    </template>
                 </el-table-column>
             </el-table>
         </div>
@@ -164,8 +166,10 @@ export default {
             console.log(`当前页: ${val}`);
         },
         // 查看凭证按钮
-        lookProof() {
-          console.log('查看凭证按钮');
+        lookProof(index, data) {
+            console.log(index);
+            console.log(data);
+            console.log('查看凭证按钮');
         }
     }
 };
@@ -192,11 +196,11 @@ export default {
     margin-top: 20px;
     text-align: center;
 }
-.c_button{
-  border: none;
-  background: transparent;
-  margin: 8px;
-  outline: none;
-  cursor: pointer;
+.c_button {
+    border: none;
+    background: transparent;
+    margin: 8px;
+    outline: none;
+    cursor: pointer;
 }
 </style>
