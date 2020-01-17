@@ -52,31 +52,42 @@
                 <el-table-column prop="date" label="车容比" align="center"></el-table-column>
                 <el-table-column prop="date" label="状态" align="center"></el-table-column>
                 <el-table-column label="操作" align="center" class="change">
-                    <template scope="scope">
-                        <span class="c_button" @click="edit(scope.$index, scope.$row)">编辑</span>
-                        <span class="c_button" @click="del(scope.$index)">删除</span>
+                    <template slot-scope="scope">
+                        <el-button
+                            size="mini"
+                            type="primary"
+                            @click="edit(scope.$index, scope.$row)"
+                        >编辑</el-button>
+                        <el-button
+                            size="mini"
+                            type="danger"
+                            @click="del(scope.$index)"
+                        >删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
             <!-- 编辑弹框 -->
             <el-dialog title="编辑" :visible.sync="exitFlag" :fullscreen="true">
                 <h1>我的下标是{{testIndex}}</h1>
-                <el-form :inline="true" :model="formInline" class="demo-form-inline rowcenter">
+                <el-form :inline="true" :model="tkForm" class="demo-form-inline rowcenter">
                     <el-form-item label="名称：">
-                        <el-input v-model="formInline.user" placeholder="请输入名称"></el-input>
+                        <el-input v-model="tkForm.fenceExplain" placeholder="请输入名称"></el-input>
                     </el-form-item>
                     <el-form-item label="可容纳：">
-                        <el-input v-model="formInline.user" placeholder="请输入数量"></el-input>
+                        <el-input v-model="tkForm.carNumber" placeholder="请输入数量"></el-input>
+                    </el-form-item>
+                    <el-form-item label="区域名称：">
+                        <el-input v-model="tkForm.fenceName" placeholder="请输入区域名称"></el-input>
                     </el-form-item>
                     <el-form-item label="状态：">
-                        <el-select v-model="formInline.region" placeholder="禁用">
-                            <el-option label="启用" value="shanghai"></el-option>
-                            <el-option label="禁用" value="beijing"></el-option>
+                        <el-select v-model="tkForm.fencestatus" placeholder="禁用">
+                            <el-option label="启用" value="1"></el-option>
+                            <el-option label="禁用" value="0"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="日期时间：">
                         <div class="block">
-                            <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"></el-date-picker>
+                            <el-date-picker v-model="tkForm.time" type="datetime" placeholder="选择日期时间"></el-date-picker>
                         </div>
                     </el-form-item>
                 </el-form>
@@ -171,14 +182,26 @@ export default {
             exitFlag: false,
             formLabelWidth: '120px',
             // 测试数据
-            testIndex: ''
+            testIndex: '',
+            tkForm: {
+                fenceExplain: '',
+                fenceName: '',
+                carNumber: '',
+                fencestatus: '',
+                time: ''
+            },
+            // 区域坐标
+            fenceRange: '1s'
         };
     },
-    updated() {
+    beforeUpdate() {
         // 编辑地图，延迟500毫秒
         setTimeout(() => {
             this.getMap();
         }, 500);
+    },
+    mounted(){
+       
     },
     methods: {
         // 搜索按钮事件
@@ -217,6 +240,7 @@ export default {
             console.log(data);
             this.testIndex = index;
             console.log('编辑按钮');
+            // this.getMap();
             this.exitFlag = true;
         },
         // 删除按钮
@@ -227,6 +251,7 @@ export default {
         // 调用百度API
         getMap() {
             // 百度地图API功能
+            console.log(333);
             var map = new BMap.Map('map');
             var poi = new BMap.Point(116.307852, 40.057031);
             map.centerAndZoom(poi, 16);
@@ -238,7 +263,11 @@ export default {
                 //将多边形保存到数组
                 overlays.push(e.overlay);
                 console.log('-----------------');
-                console.log(overlays[0].bf);
+                // console.log(overlays[0].bf)
+                // 将数组转为字符串发送
+                // console.log(JSON.stringify(overlays[0].bf[3]));
+                this.fenceRange = JSON.stringify(overlays[0].bf[3]);
+                console.log(this.fenceRange);
                 console.log('-----------------');
                 //开启编辑模式
                 e.overlay.enableEditing();
@@ -339,6 +368,10 @@ export default {
         // 弹窗提交事件
         submit() {
             console.log('提交');
+            console.log(this.fenceRange);
+            console.log('==============')
+            console.log(this.tkForm);
+            console.log(this.fenceRange);
             this.exitFlag = false;
         }
     }
